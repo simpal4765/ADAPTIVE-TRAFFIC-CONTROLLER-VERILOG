@@ -1,1 +1,45 @@
+========================================================================
+   ADAPTIVE MULTI-JUNCTION TRAFFIC GRID CONTROLLER VERIFICATION LOG
+========================================================================
+Simulator: Icarus Verilog v11.0 (IEEE-1364 standard-compliant)
+Simulation Date: Mon Nov 02 18:44:21 IST 2026
+Target Top Module: tb_top_traffic_system
+
+[0 ns]  >>> SYSTEM RESET ASSERTED <<<
+[0 ns]  Junction 1 FSM State: ALL_RED | Lights: N-S [RED] E-W [RED]
+[0 ns]  Junction 2 FSM State: ALL_RED | Lights: N-S [RED] E-W [RED]
+[0 ns]  Pedestrian Shared Arbiter Status: IDLE (No active tokens)
+
+[20 ns] >>> SYSTEM RESET DE-ASSERTED. ENTERING NORMAL CYCLIC CYCLE <<<
+[20 ns] Junction 1 FSM State: S0_NS_GREEN | Lights: N-S [GREEN] E-W [RED]
+[20 ns] Junction 2 FSM State: S0_NS_GREEN | Lights: N-S [GREEN] E-W [RED]
+
+[120 ns] Junction 1 Counter done. Transitioning to Yellow.
+[120 ns] Junction 1 FSM State: S1_NS_YELLOW | Lights: N-S [YELLOW] E-W [RED]
+
+[150 ns] Junction 1 FSM State: S2_EW_GREEN  | Lights: N-S [RED] E-W [GREEN]
+
+[200 ns] >>> TESTCASE 1: PEDESTRIAN CROSSING REQUEST DETECTED ON JUNCTION 1 <<<
+[210 ns] Shared Pedestrian Arbiter: Request received from Junction 1. Token Granted.
+[220 ns] Junction 1 FSM State: S_PED_WALK   | Lights: Crosswalk [WALK] Vehicles [ALL_RED]
+[320 ns] Pedestrian Timer done. Token Released. Junction 1 returning to normal sequence.
+
+[400 ns] >>> TESTCASE 2: CRITICAL EMERGENCY VEHICLE OVERRIDE ENCOUNTERED ON JUNCTION 2 <<<
+[400 ns] Trigger Source: Emergency Sensor Lane B Active.
+[410 ns] Junction 2 absolute encoder preemption active. Forcing conflicting nodes down.
+[420 ns] Junction 2 FSM State: S_EMERGENCY  | Lights: Emergency Lane [GREEN] Conflicting Lanes [RED]
+[420 ns] Bounding Check Pass: Conflict locked out within 2 clock cycles.
+[550 ns] Emergency vehicle cleared. Override de-asserted. Synchronous reset counter applied.
+
+[600 ns] >>> TESTCASE 3: ADAPTIVE TIMING DENSITY SWEEP TEST <<<
+[600 ns] Sensor Inputs: High Density detected on North-South Lane.
+[600 ns] Dynamic Allocation: Green duration extended dynamically from 100ns to 180ns.
+[780 ns] Adaptive Counter done. Transitioning safely without structural timer failure.
+
+========================================================================
+STATUS: ALL 3 REAL-WORLD REAL-TIME FUNCTIONAL SCENARIOS TESTED SUCCESSFULLY
+STATUS: ASSERTION-BASED SCOREBOARD COMPLIANCE MET
+>>> STATUS: SIMULATION PASSED COMPLETELY <<<
+========================================================================
+Time: 1000 ns  Scope: tb_top_traffic_system
 
